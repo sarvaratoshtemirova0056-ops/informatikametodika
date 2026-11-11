@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uz"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Informatika o’qitish metodikasi — Viktorina</title>
+<style>
+:root{--bg:#f6f7fb;--card:#fff;--tx:#1b1f2a;--mu:#6b7280;--ac:#4f46e5;--ok:#16a34a;--no:#dc2626;--bd:#e5e7eb;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111318;--card:#1c1f27;--tx:#eef0f5;--mu:#9aa1b0;--ac:#818cf8;--bd:#2c303b}}
+:root[data-theme="dark"]{--bg:#111318;--card:#1c1f27;--tx:#eef0f5;--mu:#9aa1b0;--ac:#818cf8;--bd:#2c303b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.45}
+.w{max-width:640px;margin:0 auto;padding:16px}
+.c{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin-bottom:12px}
+h1{font-size:22px;margin:4px 0 8px}h2{font-size:17px;margin:0 0 10px}
+input{width:100%;padding:12px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font-size:16px;margin:8px 0}
+button{font:inherit;cursor:pointer}
+.b{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.o{display:block;width:100%;text-align:left;background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:12px;margin:8px 0}
+.o.ok{background:var(--ok);color:#fff;border-color:var(--ok)}.o.no{background:var(--no);color:#fff;border-color:var(--no)}
+.bar{height:6px;background:var(--bd);border-radius:6px;overflow:hidden;margin:8px 0 12px}.bar i{display:block;height:100%;background:var(--ac)}
+.top{display:flex;justify-content:space-between;color:var(--mu);font-size:14px}
+.r{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)}.r:last-child{border:0}
+.m{font-size:26px;width:36px;text-align:center}.n{flex:1;font-weight:600}.s{color:var(--mu);font-size:14px;text-align:right}
+.me{background:color-mix(in srgb,var(--ac) 12%,transparent);border-radius:8px}
+.mu{color:var(--mu);font-size:14px}.hide{display:none}
+</style></head><body><div class="w">
+<div id="start" class="c"><h1>🎓 Informatika o’qitish metodikasi</h1>
+<p class="mu">45 ta savol · har bir savolga 30 soniya. Natijalar ushbu qurilma brauzerida saqlanadi.</p>
+<input id="nm" placeholder="Ism-familiyangiz" maxlength="30"><button class="b" id="go">Boshlash</button></div>
+<div id="qz" class="c hide"><div class="top"><span id="cnt"></span><span id="tm">0:00</span></div><div class="bar"><i id="pg"></i></div><h2 id="q"></h2><div id="op"></div><button class="b hide" id="nx">Keyingisi</button></div>
+<div id="rs" class="c hide"><h2 id="rt"></h2><p id="rd" class="mu"></p><button class="b" id="again">Qayta urinish</button></div>
+<div class="c"><button class="o" id="adm">🔐 Admin paneli</button><div id="ap" class="hide"><div id="lgn"><input id="lg" placeholder="Login" autocomplete="off"><input id="pw" type="password" placeholder="Parol"><button class="b" id="li">Kirish</button><p id="le" class="mu"></p></div><div id="pan" class="hide"><h2>🏆 Reyting</h2><div id="lb" class="mu">Hali natija yo’q</div></div></div><p id="note" class="mu"></p></div>
+</div>
+<script>
+const Q=[
+["Informatika o’qitish metodikasi nimani o’rganadi?","Informatikani o’qitish jarayonining qonuniyatlari, mazmuni, shakl va metodlarini","Kompyuter qurilmalarining tuzilishini","Dasturlash tillarining sintaksisini","Tarmoq protokollarini"],
+["Metodikaning asosiy savollari qaysi javobda to’g’ri berilgan?","Nima uchun, nimani, qanday o’qitish","Kim, qayerda, qachon","Qancha, qaysi, nega","Qachon, kimga, kim bilan"],
+["Metodikaning vazifalaridan biri qaysi?","Ta’lim maqsadlarini aniqlash va o’quv mazmunini tanlash","Kompyuter ishlab chiqarish","Dastur sotish","Tarmoq qurish"],
+["Informatika o’qitish metodikasi qaysi fanlar bilan chambarchas bog’liq?","Pedagogika va psixologiya","Geologiya va biologiya","Tarix va adabiyot","Kimyo va fizika"],
+["«Ta’lim metodi» nima?","O’qituvchi va o’quvchining maqsadga erishishga qaratilgan birgalikdagi faoliyat usuli","Dars jadvali","O’quv xonasining jihozlanishi","Imtihon natijasi"],
+["Innovatsiya nima?","Yangi g’oya yoki usulni amaliyotga joriy etish","Eski usulni takrorlash","Darsni qoldirish","Hujjat yuritish"],
+["Innovatsion faoliyatga tayyorlik komponentlari qaysi?","Motivatsion, kognitiv, amaliy, refleksiv","Iqtisodiy, huquqiy, siyosiy","Tashqi, ichki, o’rta","Moliyaviy, texnik, marketing"],
+["Pedagogik innovatsiya nima?","Ta’lim jarayoniga kiritilgan yangilik, uning samaradorligini oshiruvchi o’zgarish","Dars soatini qisqartirish","Darslikni ko’chirish","O’quvchini jazolash"],
+["Refleksiv komponent nimani bildiradi?","O’z faoliyatini tahlil qilish va baholash qobiliyatini","Dars jadvalini tuzishni","Kompyuterni ta’mirlashni","Hujjat to’ldirishni"],
+["Innovatsion tayyorlikni shakllantirishda qaysi omil muhim?","Doimiy o’z ustida ishlash va malaka oshirish","Faqat jazo choralari","Yangilikdan qochish","Faqat eski usullarga tayanish"],
+["Muammoli vaziyat nima?","O’quvchi mavjud bilimi bilan hal qila olmaydigan, yangi bilim talab qiladigan qiyinchilik","Dars jadvalidagi xatolik","Kompyuterning o’chib qolishi","O’quvchining kechikishi"],
+["Muammoli ta’lim bosqichlarining to’g’ri ketma-ketligi?","Muammoli vaziyat → muammoni aniqlash → gipoteza → tekshirish → xulosa","Xulosa → muammo → gipoteza","Tekshirish → xulosa → muammo","Baholash → takrorlash → muammo"],
+["Muammoli bayon metodida o’qituvchi nima qiladi?","Muammoni qo’yadi va yechish yo’lini mantiqiy isbotlab ko’rsatadi","Jim turadi","Faqat test o’tkazadi","Dars o’tmaydi"],
+["Evristik suhbat nima?","O’qituvchi savollari yordamida o’quvchilarni mustaqil yangi bilimga yetaklash","Yozma nazorat","Monolog","Diktant"],
+["Muammoli ta’limning asosiy afzalligi qaysi?","Mustaqil va ijodiy fikrlashni rivojlantiradi","Yodlashni kuchaytiradi","O’quvchi faolligini kamaytiradi","Vaqtni behuda sarflaydi"],
+["Hamkorlikda o’qitishning asosiy shakli qaysi?","Kichik guruhlarda birgalikda ishlash","Yakka tartibda ma’ruza tinglash","Faqat uy vazifasi","Faqat og’zaki so’rov"],
+["Qaysi biri hamkorlikda o’qitish metodi?","Jigsaw («Zig-zag»)","Diktant","Yodlash","Monolog"],
+["Hamkorlikda o’qitishning asosiy tamoyili qaysi?","O’zaro bog’liqlik va har bir a’zoning shaxsiy mas’uliyati","Faqat raqobat","Faqat yakka ish","E’tiborsizlik"],
+["Hamkorlikda o’qitishda o’qituvchining roli?","Tashkilotchi, yo’naltiruvchi va maslahatchi","Faqat nazoratchi-jazolovchi","Ishtirok etmaydi","Faqat ma’ruzachi"],
+["Hamkorlikda guruh natijasi nimaga asoslanadi?","Har bir a’zoning hissasi va birgalikdagi harakatga","Faqat eng kuchli o’quvchi ishiga","Tasodifga","Faqat o’qituvchi bahosiga"],
+["Modulli ta’limda «modul» nima?","O’quv materialining tugallangan, maqsadli mantiqiy qismi","Bitta kompyuter qurilmasi","Imtihon varaqasi","Dars soatlari jadvali"],
+["Modulli ta’limning o’ziga xos xususiyati?","O’quvchi o’z sur’atida mustaqil ishlaydi","Hamma bir xil tezlikda o’qiydi","Nazorat bo’lmaydi","Faqat ma’ruza o’qiladi"],
+["Modulli ta’limda nazorat turlari qaysi?","Kirish, joriy (oraliq) va yakuniy","Faqat yakuniy","Faqat og’zaki","Nazorat yo’q"],
+["Modul tarkibiga odatda nimalar kiradi?","Maqsad, o’quv mazmuni, topshiriqlar va nazorat","Faqat savollar","Faqat rasmlar","Faqat jadval"],
+["Modulli ta’limda o’qituvchining roli?","Maslahatchi va jarayon boshqaruvchisi","Faqat axborot beruvchi","Kuzatuvchi","Hech qanday rol yo’q"],
+["Loyiha ta’limi nima bilan yakunlanadi?","Amaliy ahamiyatga ega mahsulot taqdimoti bilan","Faqat baho bilan","Darslikni qayta o’qish bilan","Test bilan"],
+["Loyiha metodi bosqichlari qaysi javobda to’g’ri?","Rejalashtirish → bajarish → taqdimot → baholash","Baholash → rejalashtirish → bajarish","Taqdimot → muammo → yakun","Faqat bajarish"],
+["Quyidagilardan qaysi biri loyiha turlari?","Tadqiqot, ijodiy, axborot, amaliy","Faqat yozma","Faqat og’zaki","Faqat jadvalli"],
+["Loyiha metodining asosiy afzalligi?","Mustaqil izlanish va amaliy ko’nikmalarni shakllantiradi","Yodlashni kuchaytiradi","O’quvchi faolligini pasaytiradi","Jamoada ishlashni cheklaydi"],
+["Informatika darsida loyiha mavzusiga misol?","«Maktab veb-saytini yaratish»","Matn ko’chirish","Faqat nazariyani yodlash","Rasm chizmaslik"],
+["Masofaviy ta’limning asosiy xususiyati?","O’qituvchi va o’quvchi fazoviy ajralgan, o’qitish AKT orqali amalga oshadi","Faqat sinfda o’tadi","Faqat qog’oz darslik","Aloqa umuman bo’lmaydi"],
+["Qaysi biri o’quv jarayonini boshqarish tizimi (LMS)?","Moodle","Paint","Notepad","Calculator"],
+["Sinxron masofaviy ta’limga misol?","Video konferensiya (Zoom, Google Meet) orqali jonli dars","Yozib olingan video","Elektron kitob","Forumdagi yozishmalar"],
+["Asinxron masofaviy ta’limga misol?","Yozib olingan video darslar va forum orqali o’qish","Jonli video dars","Onlayn vebinar","Jonli chat"],
+["Kompyuter ta’limi vositalariga qaysi biri kiradi?","O’qitish dasturlari va elektron darsliklar","Kitob javoni","Doska va bo’r","Xarita"],
+["Multimediali ta’limda qaysi vositalar birlashtiriladi?","Matn, grafika, audio, video, animatsiya","Faqat matn","Faqat tovush","Faqat jadval"],
+["Multimediali ta’limning afzalligi?","Ko’rgazmalilikni oshiradi, bir necha sezgi organiga ta’sir qiladi","Faollikni kamaytiradi","Faqat bir xil axborot beradi","Materialni murakkablashtiradi"],
+["Multimediali taqdimot yaratish dasturi qaysi?","Microsoft PowerPoint","Notepad","Calculator","Disk Defragmenter"],
+["Multimedia vositalarini qo’llashda asosiy talab?","Didaktik maqsadga mosligi va me’yoridan oshmasligi","Iloji boricha ko’p animatsiya qo’yish","Faqat bezak uchun ishlatish","Darsga bog’lamaslik"],
+["Animatsiya nima?","Harakatlanuvchi tasvirlar ketma-ketligi","Faqat matn","Faqat tovush","Statik jadval"],
+["Interfaol ta’lim nimaga asoslanadi?","Ishtirokchilarning o’zaro faol muloqoti va hamkorligiga","O’qituvchi monologiga","Faqat yodlashga","Faqat yozma nazoratga"],
+["Qaysi biri interfaol metod EMAS?","Monolog tarzidagi ma’ruza","Aqliy hujum","Klaster","Keys-stadi"],
+["Klaster metodi nima?","Fikr va tushunchalarni grafik tarzda tarmoqlab ko’rsatish","Diktant yozish","Yodlash","Hisobot topshirish"],
+["Keys-stadi metodida nima tahlil qilinadi?","Real hayotiy vaziyat (keys) va uning yechimi","Faqat formulalar","Faqat sanalar","Faqat qoidalar ro’yxati"],
+["«Aqliy hujum» metodining asosiy qoidasi?","G’oyalar tanqid qilinmaydi, ko’p miqdorda g’oya yig’iladi","Har bir g’oya darhol rad etiladi","Faqat bitta javob qabul qilinadi","Jim o’tirish"]];
+const $=id=>document.getElementById(id);
+let qs=0,name="",order=[],i=0,score=0,t0=0,tick=null,locked=false,correct="",local=[];
+const KEY="informatika_metodika_scores_v1";
+const sh=a=>{a=a.slice();for(let k=a.length-1;k>0;k--){const j=Math.random()*(k+1)|0;[a[k],a[j]]=[a[j],a[k]]}return a};
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;'}[c]));
+function load(){try{local=JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){local=[]}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(local))}catch(e){$("note").textContent="Brauzer xotirasiga saqlab bo‘lmadi."}}
+function lb(){
+  load();
+  const best={};local.forEach(r=>{const k=r.name.toLowerCase(),o=best[k];if(!o||r.score>o.score||(r.score===o.score&&r.time<o.time))best[k]=r});
+  const all=Object.values(best).sort((a,b)=>b.score-a.score||a.time-b.time);
+  if(!all.length){$("lb").textContent="Hali natija yo‘q";return}
+  const md=["🥇","🥈","🥉"];
+  $("lb").innerHTML=all.slice(0,50).map((r,k)=>`<div class="r"><div class="m">${md[k]||k+1}</div><div class="n">${esc(r.name)}</div><div class="s">${r.score}/45<br>${fmt(r.time)}</div></div>`).join("");
+}
+function show(id){["start","qz","rs"].forEach(x=>$(x).classList.toggle("hide",x!==id))}
+function begin(){
+  name=$("nm").value.trim();if(!name){$("nm").focus();return}
+  order=sh(Q.map((_,k)=>k));i=0;score=0;t0=Date.now();clearInterval(tick);
+  $("tm").style.color="";show("qz");ask();
+  tick=setInterval(()=>{if(locked)return;const r=30-((Date.now()-qs)/1000|0);$("tm").textContent="⏱ "+Math.max(r,0)+" s";$("tm").style.color=r<=5?"var(--no)":"";if(r<=0)answer(null)},250);
+}
+function answer(selected){
+  if(locked)return;locked=true;
+  [...$("op").children].forEach(x=>{x.disabled=true;if(x.textContent===correct)x.classList.add("ok")});
+  if(selected===correct)score++;else if(selected){[...$("op").children].find(x=>x.textContent===selected)?.classList.add("no")}
+  $("nx").textContent=i<44?"Keyingisi":"Natijani ko‘rish";$("nx").classList.remove("hide");
+}
+function ask(){
+  const [q,...o]=Q[order[i]],c=o[0];$("cnt").textContent=`Savol ${i+1}/45`;$("pg").style.width=((i+1)/45*100)+"%";
+  $("q").textContent=q;correct=c;locked=false;qs=Date.now();$("tm").textContent="⏱ 30 s";$("nx").classList.add("hide");$("op").innerHTML="";
+  sh(o).forEach(t=>{const b=document.createElement("button");b.className="o";b.textContent=t;b.onclick=()=>answer(t);$("op").appendChild(b)});
+}
+function fin(){
+  clearInterval(tick);const time=(Date.now()-t0)/1000|0;show("rs");
+  $("rt").textContent=`${name}, natijangiz: ${score}/45`;$("rd").textContent=`Sarflangan vaqt: ${fmt(time)} · Natija ushbu qurilma brauzerida saqlandi.`;
+  local.push({name,score,time,date:new Date().toISOString()});save();lb();
+}
+const AL="admin",AP="metodika2026";
+$("adm").onclick=()=>$("ap").classList.toggle("hide");
+$("li").onclick=()=>{if($("lg").value!==AL||$("pw").value!==AP){$("le").textContent="Login yoki parol noto‘g‘ri";return}
+  $("lgn").classList.add("hide");$("pan").classList.remove("hide");lb();
+  $("note").textContent="Eslatma: GitHub Pages statik sayt. Reyting faqat shu brauzer/qurilmada saqlanadi; boshqa foydalanuvchilarning natijalari markaziy bazaga yuborilmaydi."};
+$("go").onclick=begin;$("again").onclick=()=>{show("start");$("nm").value=name};
+$("nx").onclick=()=>{++i<45?ask():fin()};
+load();lb();
+$("note").textContent="Natijalar ushbu qurilma brauzerida saqlanadi.";
+</script></body></html>
